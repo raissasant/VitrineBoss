@@ -52,7 +52,7 @@
     @yield('scripts')
 
     {{-- BOTÕES FLUTUANTES: WhatsApp e Instagram --}}
-    <div class="fixed bottom-4 right-4 z-50 flex flex-col gap-3">
+    <div class="fixed bottom-20 right-4 z-50 flex flex-col gap-3">
 
         <!-- WhatsApp -->
         <a href="https://wa.me/5554996789791" target="_blank"
