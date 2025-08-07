@@ -13,7 +13,7 @@ class LeadController extends Controller
         $request->validate([
             'nome' => 'required|string|max:255',
             'email' => 'required|email',
-            'whatsapp' => 'nullable|string|max:20',
+            'whatsapp' => 'nullable|digits_between:10,14', // 👈 apenas números entre 10 e 14 dígitos
             'produto_nome' => 'nullable|string|max:255',
             'produto_slug' => 'nullable|string|max:255',
         ]);

@@ -5,16 +5,16 @@ namespace App\Http\Controllers;
 use App\Models\Produto;
 use App\Models\Clique;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller; // ✅ Garantido
+use App\Http\Controllers\Controller;
 
 class ProdutoController extends Controller
 {
     /**
      * Exibe a vitrine pública de produtos.
      */
-        public function index(Request $request)
+    public function index(Request $request)
     {
-        $query = Produto::with(['plataforma', 'categoria']);
+        $query = Produto::with(['plataforma', 'categoria', 'imagens']); // ✅ adicionamos imagens
 
         if ($request->filled('categoria_id')) {
             $query->where('categoria_id', $request->categoria_id);
@@ -40,7 +40,7 @@ class ProdutoController extends Controller
      */
     public function show($slug)
     {
-        $produto = Produto::where('slug', $slug)->firstOrFail();
+        $produto = Produto::with('imagens', 'categoria', 'plataforma')->where('slug', $slug)->firstOrFail();
         return view('produto', compact('produto'));
     }
 

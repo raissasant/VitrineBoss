@@ -29,7 +29,7 @@
         <div class="flex justify-center mb-10">
             <a href="{{ route('produto.go', $produto->slug) }}" target="_blank"
                class="bg-green-600 hover:bg-green-700 text-white text-lg px-6 py-3 rounded-md shadow-md transition">
-                👉 Comprar agora com meu link de afiliada
+                Comprar agora 
             </a>
         </div>
 
@@ -78,9 +78,10 @@
 
                 {{-- WhatsApp --}}
                 <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-1">WhatsApp (opcional)</label>
-                    <input type="text" name="whatsapp"
+                    <label class="block text-sm font-medium text-gray-700 mb-1">WhatsApp</label>
+                    <input type="text" name="whatsapp" id="whatsapp"
                            placeholder="Ex: 54999999999"
+                           inputmode="numeric" pattern="\d*" maxlength="14"
                            class="w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-2 focus:ring-pink-400">
                 </div>
 
@@ -105,6 +106,14 @@
         if (sucesso && typeof fbq !== 'undefined') {
             fbq('track', 'Lead');
             console.log('✅ Evento Lead disparado para o Pixel Meta');
+        }
+
+        // Restringe o campo WhatsApp para aceitar apenas números
+        const whatsappInput = document.getElementById('whatsapp');
+        if (whatsappInput) {
+            whatsappInput.addEventListener('input', function () {
+                this.value = this.value.replace(/\D/g, '');
+            });
         }
     });
 </script>

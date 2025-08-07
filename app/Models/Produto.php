@@ -17,6 +17,10 @@ class Produto extends Model
         'plataforma_id',
     ];
 
+    public function imagens()
+    {
+    return $this->hasMany(\App\Models\ProdutoImagem::class);
+    }
 
     public function categoria()
     {

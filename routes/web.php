@@ -24,8 +24,6 @@ Route::get('/plataformas', [PlataformaPublicController::class, 'index'])->name('
 
 Route::post('/capturar-lead', [LeadController::class, 'store'])->name('capturar.lead');
 
-
-
 // ================================
 // REDIRECIONAMENTO /DASHBOARD
 // ================================
@@ -50,6 +48,10 @@ Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () 
     Route::resource('produtos', AdminProdutoController::class);
     Route::resource('categorias', CategoriaController::class);
     Route::resource('plataformas', PlataformaController::class);
+
+    // ✅ AJUSTADO: ROTA DE REMOÇÃO DE IMAGEM COM PREFIXO CORRETO
+    Route::delete('produtos/{produto}/imagens/{imagem}', [AdminProdutoController::class, 'destroyImage'])
+    ->name('produtos.imagens.destroy'); // sem "admin." aqui!
 });
 
 // ================================
