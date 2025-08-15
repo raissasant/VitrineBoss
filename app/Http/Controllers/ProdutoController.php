@@ -12,9 +12,9 @@ class ProdutoController extends Controller
     /**
      * Exibe a vitrine pública de produtos.
      */
-    public function index(Request $request)
+        public function index(Request $request)
     {
-        $query = Produto::with(['plataforma', 'categoria', 'imagens']); // ✅ adicionamos imagens
+        $query = Produto::with(['plataforma', 'categoria', 'imagens']);
 
         if ($request->filled('categoria_id')) {
             $query->where('categoria_id', $request->categoria_id);
@@ -28,7 +28,12 @@ class ProdutoController extends Controller
             $query->where('nome', 'like', '%' . $request->busca . '%');
         }
 
-        $produtos = $query->paginate(9);
+        // 🔥 novos primeiro
+        $query->orderByDesc('id'); // ou ->latest();
+
+        // 9 itens (fecha legal no seu grid) + mantém filtros na paginação
+        $produtos = $query->paginate(9)->withQueryString();
+
         $categorias = \App\Models\Categoria::all();
         $plataformas = \App\Models\Plataforma::all();
 

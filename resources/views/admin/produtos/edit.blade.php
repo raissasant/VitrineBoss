@@ -36,7 +36,7 @@
                 @foreach($produto->imagens as $imagem)
                     <div class="relative inline-block">
                         <img src="{{ asset('storage/' . $imagem->caminho) }}" class="h-24 w-24 rounded object-cover shadow">
-                        
+
                         {{-- Formulário de exclusão de imagem --}}
                         <form method="POST" action="{{ route('admin.produtos.imagens.destroy', [$produto->id, $imagem->id]) }}"
                               onsubmit="return confirm('Deseja remover esta imagem?')" class="absolute top-0 right-0">
@@ -68,11 +68,13 @@
                           class="w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm">{{ old('descricao', $produto->descricao) }}</textarea>
             </div>
 
-            {{-- Preço --}}
+            {{-- Preço (string, opcional) --}}
             <div>
-                <label class="block text-sm font-medium text-gray-700 mb-1">Preço</label>
+                <label class="block text-sm font-medium text-gray-700 mb-1">Preço <span class="text-gray-400">(opcional)</span></label>
                 <input type="text" name="preco" value="{{ old('preco', $produto->preco) }}"
-                       class="w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm">
+                       class="w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm"
+                       placeholder="Ex.: 49,90 • R$ 197 • A combinar">
+                <small class="text-gray-500">Aceita números e letras (ex.: “R$ 197”, “A combinar”).</small>
             </div>
 
             {{-- Link de Afiliado --}}

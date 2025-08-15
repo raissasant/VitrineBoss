@@ -15,7 +15,10 @@ class ProdutoController extends Controller
 {
     public function index()
     {
-        $produtos = Produto::with('categoria', 'plataforma', 'imagens')->paginate(10);
+        $produtos = Produto::with('categoria', 'plataforma', 'imagens')
+            ->orderByDesc('id') // 🔥 novos primeiro
+            ->paginate(10);
+
         return view('admin.produtos.index', compact('produtos'));
     }
 
@@ -28,14 +31,10 @@ class ProdutoController extends Controller
 
     public function store(Request $request)
     {
-        $request->merge([
-            'preco' => str_replace(',', '.', $request->input('preco'))
-        ]);
-
         $request->validate([
             'nome' => 'required',
             'descricao' => 'nullable|string',
-            'preco' => 'nullable|numeric',
+            'preco' => 'nullable|string', // Alterado para string
             'link_afiliado' => 'required',
             'plataforma_id' => 'required',
             'categoria_id' => 'required',
@@ -77,17 +76,10 @@ class ProdutoController extends Controller
 
     public function update(Request $request, Produto $produto)
     {
-        // Debug temporário
-        \Log::info('Chamou método update()', $request->all());
-
-        $request->merge([
-            'preco' => str_replace(',', '.', $request->input('preco'))
-        ]);
-
         $request->validate([
             'nome' => 'required',
             'descricao' => 'nullable|string',
-            'preco' => 'nullable|numeric',
+            'preco' => 'nullable|string', // Alterado para string
             'link_afiliado' => 'required',
             'plataforma_id' => 'required',
             'categoria_id' => 'required',

@@ -42,12 +42,13 @@
                 <small class="text-gray-500">Você pode enviar várias imagens.</small>
             </div>
 
-            {{-- Preço --}}
+            {{-- Preço (string, opcional) --}}
             <div>
-                <label class="block text-sm font-medium text-gray-700 mb-1">Preço</label>
+                <label class="block text-sm font-medium text-gray-700 mb-1">Preço <span class="text-gray-400">(opcional)</span></label>
                 <input type="text" name="preco" value="{{ old('preco') }}"
                        class="w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-2 focus:ring-pink-300 focus:outline-none"
-                       placeholder="Ex: 49,90">
+                       placeholder="Ex.: 49,90 • R$ 197 • A combinar">
+                <small class="text-gray-500">Aceita números e letras (ex.: “R$ 197”, “A combinar”).</small>
             </div>
 
             {{-- Link de afiliado --}}
