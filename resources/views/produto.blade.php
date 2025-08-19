@@ -9,10 +9,12 @@
             <h1 class="text-3xl md:text-4xl font-bold text-gray-800">{{ $produto->nome }}</h1>
             <p class="text-sm text-gray-600 mt-2">{{ $produto->descricao }}</p>
 
-            @if($produto->preco)
+            @if($produto->preco_formatado)
                 <p class="text-lg font-semibold text-pink-600 mt-3">
-                    Preço: R$ {{ number_format($produto->preco, 2, ',', '.') }}
+                    Preço: {{ $produto->preco_formatado }}
                 </p>
+            @else
+                <p class="text-xs text-gray-500 mt-3">Preço sob consulta</p>
             @endif
         </div>
 

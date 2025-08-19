@@ -73,10 +73,11 @@
                                     {{ \Illuminate\Support\Str::limit($produto->descricao, 60) }}
                                 </p>
 
-                                {{-- Preço como string opcional --}}
-                                @if(!is_null($produto->preco) && trim($produto->preco) !== '')
+                                {{-- Preço padronizado pelo accessor --}}
+                                          
+                                @if($produto->preco_formatado)
                                     <p class="text-sm text-green-600 font-bold mb-2">
-                                        {{ $produto->preco }}
+                                        {{ $produto->preco_formatado }}
                                     </p>
                                 @else
                                     <p class="text-xs text-gray-500 mb-2">
